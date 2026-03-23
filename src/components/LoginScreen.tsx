@@ -40,7 +40,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
         <div className="w-full space-y-8">
           <div className="text-left space-y-5">
             <div className="relative group">
-              <label className="block font-label text-[10px] tracking-widest uppercase text-outline mb-2 ml-1 transition-colors group-focus-within:text-primary">
+              <label htmlFor="user-date" className="block font-label text-[10px] tracking-widest uppercase text-outline mb-2 ml-1 transition-colors group-focus-within:text-primary">
                 {t('settings.date.label')}
               </label>
               <div className="relative">
@@ -48,6 +48,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
                   <Calendar className="w-4 h-4 text-outline-variant group-focus-within:text-primary transition-colors" />
                 </div>
                 <input 
+                  id="user-date"
                   type="date" 
                   value={userDate}
                   onChange={(e) => setUserDate(e.target.value)}
@@ -56,7 +57,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               </div>
             </div>
             <div className="relative group">
-              <label className="block font-label text-[10px] tracking-widest uppercase text-outline mb-2 ml-1 transition-colors group-focus-within:text-tertiary">
+              <label htmlFor="partner-date" className="block font-label text-[10px] tracking-widest uppercase text-outline mb-2 ml-1 transition-colors group-focus-within:text-tertiary">
                 {t('settings.partnerDate.label')}
               </label>
               <div className="relative">
@@ -64,6 +65,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
                   <Heart className="w-4 h-4 text-outline-variant group-focus-within:text-tertiary transition-colors" />
                 </div>
                 <input 
+                  id="partner-date"
                   type="date" 
                   value={partnerDate}
                   onChange={(e) => setPartnerDate(e.target.value)}
