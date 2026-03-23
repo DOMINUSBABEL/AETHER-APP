@@ -69,6 +69,7 @@ export default function App() {
           </nav>
 
           <button 
+            aria-label="Settings"
             onClick={() => setIsSettingsOpen(true)}
             className="w-8 h-8 md:w-full md:h-auto md:px-8 md:py-4 md:rounded-none md:border-t md:border-l-0 md:border-r-0 md:border-b-0 md:bg-transparent rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/20 flex items-center justify-center md:justify-start md:gap-3 hover:bg-surface-container-high transition-colors"
           >

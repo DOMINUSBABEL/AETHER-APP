@@ -32,17 +32,18 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             <div className="p-6 md:p-8">
               <div className="flex justify-between items-center mb-8">
                 <h2 className="font-headline text-2xl text-primary">{t('settings.title')}</h2>
-                <button onClick={onClose} className="p-2 rounded-full bg-surface-container-highest hover:bg-surface-container-lowest text-on-surface-variant hover:text-primary transition-colors">
+                <button aria-label={t('settings.close') || "Close"} onClick={onClose} className="p-2 rounded-full bg-surface-container-highest hover:bg-surface-container-lowest text-on-surface-variant hover:text-primary transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
               
               <div className="space-y-6">
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <label htmlFor="settings-user-date" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.date.label')}
                   </label>
                   <input 
+                    id="settings-user-date"
                     type="date" 
                     value={userDate}
                     onChange={(e) => setUserDate(e.target.value)}
@@ -54,10 +55,11 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <label htmlFor="settings-partner-date" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.partnerDate.label')}
                   </label>
                   <input 
+                    id="settings-partner-date"
                     type="date" 
                     value={partnerDate}
                     onChange={(e) => setPartnerDate(e.target.value)}
