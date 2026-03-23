@@ -5,10 +5,19 @@ import DailyScreen from './components/DailyScreen';
 import TarotScreen from './components/TarotScreen';
 import SoulMapScreen from './components/SoulMapScreen';
 import SettingsModal from './components/SettingsModal';
+import LoginScreen from './components/LoginScreen';
+import { useLanguage } from './context/LanguageContext';
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeTab, setActiveTab] = useState('daily');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  const { t } = useLanguage();
+
+  if (!isLoggedIn) {
+    return <LoginScreen onLogin={() => setIsLoggedIn(true)} />;
+  }
 
   const renderScreen = () => {
     switch (activeTab) {
@@ -32,7 +41,7 @@ export default function App() {
           <header className="absolute top-0 w-full z-50 flex items-center justify-between px-6 h-16 bg-background/80 backdrop-blur-md border-b border-outline-variant/10">
             <Sparkles className="text-primary w-5 h-5" />
             <h1 className="font-headline tracking-widest text-primary text-sm font-bold uppercase">
-              The Digital Oracle
+              {t('login.title')}
             </h1>
             <button 
               onClick={() => setIsSettingsOpen(true)}
@@ -53,19 +62,19 @@ export default function App() {
           <nav className="absolute bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-background/80 backdrop-blur-xl border-t border-outline-variant/10 rounded-t-3xl">
             <NavItem 
               icon={<Compass className="w-5 h-5" />} 
-              label="Sincronicidad" 
+              label={t('nav.daily')} 
               isActive={activeTab === 'daily'} 
               onClick={() => setActiveTab('daily')} 
             />
             <NavItem 
               icon={<Layers className="w-5 h-5" />} 
-              label="Tarot" 
+              label={t('nav.tarot')} 
               isActive={activeTab === 'tarot'} 
               onClick={() => setActiveTab('tarot')} 
             />
             <NavItem 
               icon={<SunMoon className="w-5 h-5" />} 
-              label="Carta Astral" 
+              label={t('nav.soulmap')} 
               isActive={activeTab === 'soulmap'} 
               onClick={() => setActiveTab('soulmap')} 
             />

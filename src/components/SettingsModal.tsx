@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { useDateContext } from '../context/DateContext';
+import { useLanguage } from '../context/LanguageContext';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -8,7 +9,8 @@ interface SettingsModalProps {
 }
 
 export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
-  const { userDate, setUserDate } = useDateContext();
+  const { userDate, setUserDate, partnerDate, setPartnerDate } = useDateContext();
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <AnimatePresence>
@@ -29,7 +31,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
           >
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="font-headline text-xl text-primary">Configuración</h2>
+                <h2 className="font-headline text-xl text-primary">{t('settings.title')}</h2>
                 <button onClick={onClose} className="text-on-surface-variant hover:text-primary transition-colors">
                   <X className="w-5 h-5" />
                 </button>
@@ -38,7 +40,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               <div className="space-y-4">
                 <div>
                   <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2">
-                    Fecha de Sincronización
+                    {t('settings.date.label')}
                   </label>
                   <input 
                     type="date" 
@@ -47,7 +49,45 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 transition-colors"
                   />
                   <p className="text-[10px] text-on-surface-variant mt-2 italic">
-                    Esta fecha determina las energías, cartas y sincronías de tu experiencia.
+                    {t('settings.date.desc')}
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 mt-4">
+                    {t('settings.partnerDate.label')}
+                  </label>
+                  <input 
+                    type="date" 
+                    value={partnerDate}
+                    onChange={(e) => setPartnerDate(e.target.value)}
+                    className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 transition-colors"
+                  />
+                  <p className="text-[10px] text-on-surface-variant mt-2 italic">
+                    {t('settings.partnerDate.desc')}
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 mt-4">
+                    {t('settings.language.label')}
+                  </label>
+                  <div className="flex items-center justify-between bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-1">
+                    <button
+                      onClick={() => setLanguage('es')}
+                      className={`flex-1 py-2 rounded-lg font-label text-xs tracking-widest uppercase transition-all ${language === 'es' ? 'bg-surface-container-high text-primary shadow-md' : 'text-on-surface-variant hover:text-on-surface'}`}
+                    >
+                      Español
+                    </button>
+                    <button
+                      onClick={() => setLanguage('en')}
+                      className={`flex-1 py-2 rounded-lg font-label text-xs tracking-widest uppercase transition-all ${language === 'en' ? 'bg-surface-container-high text-primary shadow-md' : 'text-on-surface-variant hover:text-on-surface'}`}
+                    >
+                      English
+                    </button>
+                  </div>
+                  <p className="text-[10px] text-on-surface-variant mt-2 italic">
+                    {t('settings.language.desc')}
                   </p>
                 </div>
               </div>
@@ -57,7 +97,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   onClick={onClose}
                   className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-lg py-3 font-label text-xs tracking-widest uppercase transition-colors"
                 >
-                  Aceptar
+                  {t('settings.close')}
                 </button>
               </div>
             </div>

@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { Heart, Briefcase, Activity, Star } from 'lucide-react';
 import { useDateContext } from '../context/DateContext';
+import { useLanguage } from '../context/LanguageContext';
 import { createSeededRandom, getRandomItem, getMultipleRandomItems } from '../utils/random';
 import { 
   psychicClimates, 
@@ -13,8 +14,10 @@ import {
 } from '../data/dailyData';
 
 export default function DailyScreen() {
-  const { seed } = useDateContext();
+  const { seed, partnerSeed, partnerDate } = useDateContext();
+  const { t } = useLanguage();
   const randomFunc = createSeededRandom(seed);
+  const partnerRandomFunc = createSeededRandom(seed + partnerSeed);
 
   const climate = getRandomItem(psychicClimates, randomFunc);
   const egoText = getRandomItem(egoBoundaries, randomFunc);
@@ -24,6 +27,8 @@ export default function DailyScreen() {
   const numericMarker = Math.floor(randomFunc() * 9) + 1; // 1-9
   const displayedSigns = getMultipleRandomItems(zodiacSigns, 4, randomFunc);
   const activeSignIndex = Math.floor(randomFunc() * 4);
+  
+  const sharedClimate = getRandomItem(psychicClimates, partnerRandomFunc);
 
   return (
     <motion.div 
@@ -52,7 +57,7 @@ export default function DailyScreen() {
           
           <div className="flex items-center gap-2 mb-4 relative z-10">
             <div className="h-px w-8 bg-tertiary/50"></div>
-            <span className="font-label text-[10px] tracking-[0.3em] text-tertiary uppercase">Clima Psíquico</span>
+            <span className="font-label text-[10px] tracking-[0.3em] text-tertiary uppercase">{t('daily.header.subtitle')}</span>
           </div>
           
           <h2 className="font-headline text-3xl mb-6 leading-tight italic relative z-10">
@@ -69,17 +74,17 @@ export default function DailyScreen() {
       <section className="space-y-4">
         <PillarCard 
           icon={<Heart className="w-5 h-5 text-tertiary" />}
-          title="Fronteras del Ego"
+          title={t('daily.ego.title')}
           text={egoText}
         />
         <PillarCard 
           icon={<Briefcase className="w-5 h-5 text-primary" />}
-          title="Manifestación Consciente"
+          title={t('daily.conscious.title')}
           text={manifestationText}
         />
         <PillarCard 
           icon={<Activity className="w-5 h-5 text-secondary" />}
-          title="Conexión Somática"
+          title={t('daily.somatic.title')}
           text={somaticText}
         />
       </section>
@@ -88,11 +93,11 @@ export default function DailyScreen() {
       <section>
         <div className="grid grid-cols-2 gap-px bg-outline-variant/20 rounded-xl overflow-hidden border border-outline-variant/10">
           <div className="p-6 bg-surface-container-lowest flex flex-col items-center text-center">
-            <span className="font-label text-[9px] tracking-[0.2em] uppercase text-outline mb-3">Marcador Numérico</span>
+            <span className="font-label text-[9px] tracking-[0.2em] uppercase text-outline mb-3">{t('daily.numeric.title')}</span>
             <span className="font-headline text-5xl text-primary text-glow">{numericMarker}</span>
           </div>
           <div className="p-6 bg-surface-container-lowest flex flex-col items-center text-center">
-            <span className="font-label text-[9px] tracking-[0.2em] uppercase text-outline mb-3">Frecuencia Cromática</span>
+            <span className="font-label text-[9px] tracking-[0.2em] uppercase text-outline mb-3">{t('daily.chromatic.title')}</span>
             <div className="flex flex-col items-center">
               <div className={`w-4 h-4 rounded-full ${chromatic.color} mb-2 ${chromatic.shadow}`}></div>
               <span className="font-label text-xs font-bold text-primary tracking-[0.2em] uppercase">{chromatic.name}</span>
@@ -100,6 +105,25 @@ export default function DailyScreen() {
           </div>
         </div>
       </section>
+
+      {/* Compatibility Section */}
+      {partnerDate && (
+        <section className="glass-card rounded-xl p-6 border border-tertiary/20 shadow-lg mt-8 bg-tertiary/5">
+          <div className="flex items-center gap-3 mb-4">
+            <Heart className="text-tertiary w-5 h-5" />
+            <h3 className="font-headline text-xl text-tertiary">{t('daily.compatibility.title')}</h3>
+          </div>
+          <p className="text-on-surface-variant text-sm leading-relaxed font-light mb-4">
+            {t('daily.compatibility.desc')}
+          </p>
+          <div className="bg-surface-container p-4 rounded-lg border border-outline-variant/10">
+            <h4 className="font-headline text-lg text-on-surface mb-2">{sharedClimate.title}</h4>
+            <p className="text-sm text-on-surface-variant leading-relaxed">
+              {sharedClimate.text}
+            </p>
+          </div>
+        </section>
+      )}
     </motion.div>
   );
 }
