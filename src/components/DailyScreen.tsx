@@ -13,8 +13,30 @@ import {
   zodiacSigns
 } from '../data/dailyData';
 
+const getZodiacSign = (dateString: string): string | null => {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  if (isNaN(date.getTime())) return null;
+  const month = date.getUTCMonth() + 1; // 1-12
+  const day = date.getUTCDate();
+
+  if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) return 'Aries';
+  if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) return 'Tauro';
+  if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) return 'Géminis';
+  if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) return 'Cáncer';
+  if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) return 'Leo';
+  if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) return 'Virgo';
+  if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) return 'Libra';
+  if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) return 'Escorpio';
+  if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) return 'Sagitario';
+  if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) return 'Capricornio';
+  if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) return 'Acuario';
+  if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) return 'Piscis';
+  return null;
+};
+
 export default function DailyScreen() {
-  const { seed, partnerSeed, partnerDate } = useDateContext();
+  const { seed, partnerSeed, partnerDate, userDate } = useDateContext();
   const { t } = useLanguage();
   const randomFunc = createSeededRandom(seed);
   const partnerRandomFunc = createSeededRandom(seed + partnerSeed);
@@ -25,8 +47,9 @@ export default function DailyScreen() {
   const somaticText = getRandomItem(somaticConnections, randomFunc);
   const chromatic = getRandomItem(chromaticFrequencies, randomFunc);
   const numericMarker = Math.floor(randomFunc() * 9) + 1; // 1-9
-  const displayedSigns = getMultipleRandomItems(zodiacSigns, 4, randomFunc);
-  const activeSignIndex = Math.floor(randomFunc() * 4);
+  
+  const userSign = getZodiacSign(userDate);
+  const activeSignIndex = userSign ? zodiacSigns.indexOf(userSign) : Math.floor(randomFunc() * 12);
   
   const sharedClimate = getRandomItem(psychicClimates, partnerRandomFunc);
 
@@ -41,7 +64,7 @@ export default function DailyScreen() {
       {/* Zodiac Selector (Visual Only) */}
       <section>
         <div className="flex overflow-x-auto space-x-8 pb-4 scroll-smooth no-scrollbar">
-          {displayedSigns.map((sign, i) => (
+          {zodiacSigns.map((sign, i) => (
             <div key={sign} className={`flex flex-col items-center space-y-2 shrink-0 ${i === activeSignIndex ? 'text-primary' : 'opacity-30'}`}>
               <span className={`font-label text-[10px] tracking-widest uppercase ${i === activeSignIndex ? 'font-bold tracking-[0.2em]' : ''}`}>{sign}</span>
               {i === activeSignIndex && <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(233,195,73,0.6)] mt-1"></div>}
@@ -71,7 +94,7 @@ export default function DailyScreen() {
       </section>
 
       {/* 3 Pillars */}
-      <section className="space-y-4">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <PillarCard 
           icon={<Heart className="w-5 h-5 text-tertiary" />}
           title={t('daily.ego.title')}
@@ -130,14 +153,14 @@ export default function DailyScreen() {
 
 function PillarCard({ icon, title, text }: { icon: ReactNode, title: string, text: string }) {
   return (
-    <div className="p-5 bg-surface-container-low/50 rounded-xl border border-outline-variant/10">
-      <div className="flex items-start gap-4">
+    <div className="p-5 bg-surface-container-low/50 rounded-xl border border-outline-variant/10 hover:bg-surface-container transition-colors duration-300 h-full flex flex-col">
+      <div className="flex items-start gap-4 flex-grow">
         <div className="w-10 h-10 flex items-center justify-center bg-surface-container rounded-full shrink-0">
           {icon}
         </div>
-        <div>
+        <div className="flex flex-col h-full">
           <h3 className="font-label text-[10px] tracking-widest uppercase text-outline mb-1.5">{title}</h3>
-          <p className="text-on-surface text-sm leading-relaxed italic opacity-90">"{text}"</p>
+          <p className="text-on-surface text-sm leading-relaxed italic opacity-90 flex-grow">"{text}"</p>
         </div>
       </div>
     </div>

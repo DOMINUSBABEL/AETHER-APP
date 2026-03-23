@@ -66,7 +66,7 @@ export default function SoulMapScreen() {
       </section>
 
       {/* The Three Pillars */}
-      <section className="space-y-6">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Sun */}
         <PlanetCard 
           title={t('soulmap.sun.title')}
@@ -141,7 +141,7 @@ export default function SoulMapScreen() {
 
 function PlanetCard({ title, subtitle, icon, colorClass, bgClass, description }: { title: string, subtitle: string, icon: ReactNode, colorClass: string, bgClass: string, description: ReactNode }) {
   return (
-    <div className="bg-surface-container-low rounded-xl p-6 border border-outline-variant/5">
+    <div className="bg-surface-container-low rounded-xl p-6 border border-outline-variant/5 hover:bg-surface-container transition-colors duration-300 h-full flex flex-col">
       <div className="flex justify-between items-start mb-6">
         <div className="space-y-1">
           <h3 className="font-headline text-2xl text-on-surface">{title}</h3>
@@ -151,7 +151,7 @@ function PlanetCard({ title, subtitle, icon, colorClass, bgClass, description }:
           {icon}
         </div>
       </div>
-      <p className="text-sm font-light leading-relaxed text-on-surface-variant">
+      <p className="text-sm font-light leading-relaxed text-on-surface-variant flex-grow">
         {description}
       </p>
     </div>

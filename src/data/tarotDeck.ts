@@ -333,11 +333,14 @@ const minorArcanaDetails: Record<string, Record<number, { name: string; archetyp
   }
 });
 
-export const getSeededRandomCards = (count: number, seed: number, offset: number = 0): TarotCardData[] => {
+export const getSeededRandomCards = (count: number, seed: number, offset: number = 0, deckType: 'full' | 'major' = 'full'): TarotCardData[] => {
   const randomFunc = createSeededRandom(seed + offset * 1000);
   
+  // Filter deck if needed
+  const availableCards = deckType === 'major' ? tarotDeck.filter(c => c.suit === 'major') : tarotDeck;
+  
   // Create a copy of the deck to shuffle
-  const shuffled = [...tarotDeck];
+  const shuffled = [...availableCards];
   
   // Fisher-Yates shuffle using the seeded random
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -348,7 +351,8 @@ export const getSeededRandomCards = (count: number, seed: number, offset: number
   return shuffled.slice(0, count);
 };
 
-export const getRandomCards = (count: number): TarotCardData[] => {
-  const shuffled = [...tarotDeck].sort(() => 0.5 - Math.random());
+export const getRandomCards = (count: number, deckType: 'full' | 'major' = 'full'): TarotCardData[] => {
+  const availableCards = deckType === 'major' ? tarotDeck.filter(c => c.suit === 'major') : tarotDeck;
+  const shuffled = [...availableCards].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 };

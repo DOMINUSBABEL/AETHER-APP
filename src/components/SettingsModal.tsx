@@ -27,75 +27,75 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-sm bg-surface-container-high rounded-2xl border border-outline-variant/20 shadow-2xl z-[70] overflow-hidden"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-md bg-surface-container-high/90 backdrop-blur-xl rounded-2xl border border-outline-variant/20 shadow-2xl z-[70] overflow-hidden"
           >
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="font-headline text-xl text-primary">{t('settings.title')}</h2>
-                <button onClick={onClose} className="text-on-surface-variant hover:text-primary transition-colors">
+            <div className="p-6 md:p-8">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="font-headline text-2xl text-primary">{t('settings.title')}</h2>
+                <button onClick={onClose} className="p-2 rounded-full bg-surface-container-highest hover:bg-surface-container-lowest text-on-surface-variant hover:text-primary transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2">
+                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.date.label')}
                   </label>
                   <input 
                     type="date" 
                     value={userDate}
                     onChange={(e) => setUserDate(e.target.value)}
-                    className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 transition-colors"
+                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-colors shadow-inner"
                   />
-                  <p className="text-[10px] text-on-surface-variant mt-2 italic">
+                  <p className="text-[10px] text-on-surface-variant mt-2 italic ml-1">
                     {t('settings.date.desc')}
                   </p>
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 mt-4">
+                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.partnerDate.label')}
                   </label>
                   <input 
                     type="date" 
                     value={partnerDate}
                     onChange={(e) => setPartnerDate(e.target.value)}
-                    className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 transition-colors"
+                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-tertiary/50 focus:bg-surface-container-lowest transition-colors shadow-inner"
                   />
-                  <p className="text-[10px] text-on-surface-variant mt-2 italic">
+                  <p className="text-[10px] text-on-surface-variant mt-2 italic ml-1">
                     {t('settings.partnerDate.desc')}
                   </p>
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 mt-4">
+                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.language.label')}
                   </label>
-                  <div className="flex items-center justify-between bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-1">
+                  <div className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
                     <button
                       onClick={() => setLanguage('es')}
-                      className={`flex-1 py-2 rounded-lg font-label text-xs tracking-widest uppercase transition-all ${language === 'es' ? 'bg-surface-container-high text-primary shadow-md' : 'text-on-surface-variant hover:text-on-surface'}`}
+                      className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'es' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'}`}
                     >
                       Español
                     </button>
                     <button
                       onClick={() => setLanguage('en')}
-                      className={`flex-1 py-2 rounded-lg font-label text-xs tracking-widest uppercase transition-all ${language === 'en' ? 'bg-surface-container-high text-primary shadow-md' : 'text-on-surface-variant hover:text-on-surface'}`}
+                      className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'en' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'}`}
                     >
                       English
                     </button>
                   </div>
-                  <p className="text-[10px] text-on-surface-variant mt-2 italic">
+                  <p className="text-[10px] text-on-surface-variant mt-2 italic ml-1">
                     {t('settings.language.desc')}
                   </p>
                 </div>
               </div>
               
-              <div className="mt-8">
+              <div className="mt-10">
                 <button 
                   onClick={onClose}
-                  className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-lg py-3 font-label text-xs tracking-widest uppercase transition-colors"
+                  className="w-full bg-primary text-on-primary hover:bg-primary-fixed rounded-xl py-4 font-label text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:translate-y-0"
                 >
                   {t('settings.close')}
                 </button>
