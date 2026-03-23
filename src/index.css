@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #12121d;
+  --color-surface-container-lowest: #0d0d18;
+  --color-surface-container-low: #1b1a26;
+  --color-surface-container: #1f1e2a;
+  --color-surface-container-high: #292935;
+  --color-surface-container-highest: #343440;
+  
+  --color-primary: #e9c349;
+  --color-on-primary: #3c2f00;
+  --color-primary-fixed: #ffe088;
+  --color-primary-fixed-dim: #e9c349;
+  
+  --color-secondary: #c6c6c6;
+  --color-on-secondary: #2f3131;
+  
+  --color-tertiary: #ffb77b;
+  --color-on-tertiary: #4d2700;
+  
+  --color-background: #12121d;
+  --color-on-background: #e3e0f1;
+  --color-on-surface: #e3e0f1;
+  --color-on-surface-variant: #c7c5cc;
+  
+  --color-outline: #919096;
+  --color-outline-variant: #46464c;
+  --color-error: #ffb4ab;
+
+  --font-headline: "Noto Serif", serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Space Grotesk", sans-serif;
+}
+
+@layer utilities {
+  .glass-card {
+    background-color: rgba(31, 30, 42, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  .celestial-glow {
+    box-shadow: 0 0 40px rgba(233, 195, 73, 0.08);
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 15px rgba(233, 195, 73, 0.3);
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .alchemical-gradient {
+    background: radial-gradient(circle at center, rgba(233, 195, 73, 0.15) 0%, transparent 70%);
+  }
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
