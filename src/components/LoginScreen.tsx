@@ -52,7 +52,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
                   type="date" 
                   value={userDate}
                   onChange={(e) => setUserDate(e.target.value)}
-                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl pl-11 pr-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner"
+                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl pl-11 pr-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 />
               </div>
             </div>
@@ -69,7 +69,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
                   type="date" 
                   value={partnerDate}
                   onChange={(e) => setPartnerDate(e.target.value)}
-                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl pl-11 pr-4 py-3.5 text-on-surface focus:outline-none focus:border-tertiary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner"
+                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl pl-11 pr-4 py-3.5 text-on-surface focus:outline-none focus:border-tertiary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 />
               </div>
             </div>
@@ -78,13 +78,13 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
           <div className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
             <button
               onClick={() => setLanguage('es')}
-              className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'es' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'}`}
+              className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'es' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`}
             >
               Español
             </button>
             <button
               onClick={() => setLanguage('en')}
-              className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'en' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'}`}
+              className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'en' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`}
             >
               English
             </button>
@@ -92,7 +92,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
 
           <button
             onClick={onLogin}
-            className="w-full bg-primary text-on-primary hover:bg-primary-fixed py-4 rounded-xl font-label text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:translate-y-0"
+            className="w-full bg-primary text-on-primary hover:bg-primary-fixed py-4 rounded-xl font-label text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             {t('login.button')}
           </button>
