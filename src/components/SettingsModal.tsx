@@ -32,7 +32,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             <div className="p-6 md:p-8">
               <div className="flex justify-between items-center mb-8">
                 <h2 className="font-headline text-2xl text-primary">{t('settings.title')}</h2>
-                <button aria-label={t('settings.close') || "Close"} onClick={onClose} className="p-2 rounded-full bg-surface-container-highest hover:bg-surface-container-lowest text-on-surface-variant hover:text-primary transition-colors">
+                <button aria-label={t('settings.close') || "Close"} onClick={onClose} className="p-2 rounded-full bg-surface-container-highest hover:bg-surface-container-lowest text-on-surface-variant hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -47,7 +47,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     type="date" 
                     value={userDate}
                     onChange={(e) => setUserDate(e.target.value)}
-                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-colors shadow-inner"
+                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-colors shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   />
                   <p className="text-[10px] text-on-surface-variant mt-2 italic ml-1">
                     {t('settings.date.desc')}
@@ -63,7 +63,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     type="date" 
                     value={partnerDate}
                     onChange={(e) => setPartnerDate(e.target.value)}
-                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-tertiary/50 focus:bg-surface-container-lowest transition-colors shadow-inner"
+                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-tertiary/50 focus:bg-surface-container-lowest transition-colors shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tertiary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   />
                   <p className="text-[10px] text-on-surface-variant mt-2 italic ml-1">
                     {t('settings.partnerDate.desc')}
@@ -77,13 +77,13 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   <div className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
                     <button
                       onClick={() => setLanguage('es')}
-                      className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'es' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'}`}
+                      className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'es' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     >
                       Español
                     </button>
                     <button
                       onClick={() => setLanguage('en')}
-                      className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'en' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'}`}
+                      className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'en' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     >
                       English
                     </button>
@@ -97,7 +97,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               <div className="mt-10">
                 <button 
                   onClick={onClose}
-                  className="w-full bg-primary text-on-primary hover:bg-primary-fixed rounded-xl py-4 font-label text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:translate-y-0"
+                  className="w-full bg-primary text-on-primary hover:bg-primary-fixed rounded-xl py-4 font-label text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   {t('settings.close')}
                 </button>
