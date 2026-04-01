@@ -92,14 +92,14 @@ export default function TarotScreen() {
                 <div className="grid grid-cols-1 gap-3">
                   <button
                     onClick={() => setDeckType('full')}
-                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${deckType === 'full' ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${deckType === 'full' ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   >
                     <Layers className="w-5 h-5" />
                     <span className="font-body text-sm">{t('tarot.setup.deck.full')}</span>
                   </button>
                   <button
                     onClick={() => setDeckType('major')}
-                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${deckType === 'major' ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${deckType === 'major' ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   >
                     <Sparkles className="w-5 h-5" />
                     <span className="font-body text-sm">{t('tarot.setup.deck.major')}</span>
@@ -117,7 +117,7 @@ export default function TarotScreen() {
                     <button
                       key={type}
                       onClick={() => setSpreadType(type)}
-                      className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${spreadType === type ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                      className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${spreadType === type ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     >
                       <div className="flex gap-1">
                         {Array.from({ length: parseInt(type) }).map((_, i) => (
@@ -132,7 +132,7 @@ export default function TarotScreen() {
 
               <button
                 onClick={startReading}
-                className="w-full py-4 rounded-xl bg-primary text-on-primary font-label text-xs tracking-widest uppercase hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+                className="w-full py-4 rounded-xl bg-primary text-on-primary font-label text-xs tracking-widest uppercase hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {t('tarot.setup.start')}
               </button>
@@ -149,7 +149,7 @@ export default function TarotScreen() {
             <section className="mb-10 text-center flex flex-col items-center">
               <button 
                 onClick={backToSetup}
-                className="mb-6 inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase"
+                className="mb-6 inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded px-2 py-1"
               >
                 <ArrowLeft className="w-3 h-3" />
                 {t('tarot.setup.back')}
@@ -165,7 +165,7 @@ export default function TarotScreen() {
               <button 
                 onClick={drawNewCards}
                 disabled={isDrawing}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 text-primary font-label text-[10px] tracking-widest uppercase hover:bg-primary/10 transition-colors disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 text-primary font-label text-[10px] tracking-widest uppercase hover:bg-primary/10 transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <RefreshCw className={`w-3 h-3 ${isDrawing ? 'animate-spin' : ''}`} />
                 {t('tarot.button.new')}
