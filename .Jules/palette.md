@@ -9,3 +9,6 @@
 ## 2025-02-28 - [Escape Key Exit in Custom Modals]
 **Learning:** Custom modal components often overlook the standard expected behavior of allowing users to dismiss them via the `Escape` key, trapping keyboard users or forcing mouse interaction.
 **Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.
+## 2024-04-03 - [State and Context ARIA Properties]
+**Learning:** This app heavily relies on custom UI components like segment toggles and decorative lists that lack native semantic meaning. Sighted users infer state through color shifts, but screen readers are left blind without explicit ARIA states.
+**Action:** When building custom toggles, navigation items, or decorative visual sets in this system, always supplement with `aria-pressed`, `aria-current="page"`, and `aria-hidden="true"` respectively.

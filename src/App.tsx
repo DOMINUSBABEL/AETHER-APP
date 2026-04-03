@@ -125,6 +125,7 @@ function MobileNavItem({ icon, label, isActive, onClick }: { icon: ReactNode, la
   return (
     <button 
       onClick={onClick}
+      aria-current={isActive ? "page" : undefined}
       className={`flex flex-col items-center justify-center transition-all duration-300 group ${isActive ? 'text-primary' : 'text-secondary opacity-50 hover:opacity-100'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg p-1`}
     >
       <div className={`mb-1.5 transition-transform duration-300 ${isActive ? 'scale-110' : 'group-active:scale-90'}`}>
@@ -141,6 +142,7 @@ function DesktopNavItem({ icon, label, isActive, onClick }: { icon: ReactNode, l
   return (
     <button 
       onClick={onClick}
+      aria-current={isActive ? "page" : undefined}
       className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 group ${isActive ? 'bg-primary/10 text-primary' : 'text-secondary opacity-70 hover:opacity-100 hover:bg-surface-container-high'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
     >
       <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
