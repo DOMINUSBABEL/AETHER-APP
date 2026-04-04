@@ -88,12 +88,14 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   <div className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
                     <button
                       onClick={() => setLanguage('es')}
+                      aria-pressed={language === 'es'}
                       className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'es' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     >
                       Español
                     </button>
                     <button
                       onClick={() => setLanguage('en')}
+                      aria-pressed={language === 'en'}
                       className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'en' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     >
                       English
