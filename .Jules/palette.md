@@ -9,3 +9,6 @@
 ## 2025-02-28 - [Escape Key Exit in Custom Modals]
 **Learning:** Custom modal components often overlook the standard expected behavior of allowing users to dismiss them via the `Escape` key, trapping keyboard users or forcing mouse interaction.
 **Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.
+## 2023-11-20 - [Active States on Custom Selectors]
+**Learning:** Found custom segmented controls, toggle buttons (like deck/spread selectors in TarotScreen, language selectors), and custom navigation items missing attributes to explicitly indicate their active/selected state to screen readers.
+**Action:** Use the `aria-pressed` attribute for custom toggle buttons to dynamically indicate active state. Use `aria-current="page"` on active navigation items.
