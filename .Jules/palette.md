@@ -8,4 +8,6 @@
 
 ## 2025-02-28 - [Escape Key Exit in Custom Modals]
 **Learning:** Custom modal components often overlook the standard expected behavior of allowing users to dismiss them via the `Escape` key, trapping keyboard users or forcing mouse interaction.
-**Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.
+**Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.## 2026-04-05 - [ARIA Attributes for Toggles and Navigation]
+**Learning:** Found instances where custom toggle buttons (like language selection or segmented controls in tarot screen) and navigation links were missing programmatic indicators of their active state, leaving screen reader users without crucial context.
+**Action:** Always use `aria-pressed={isActive}` for custom toggle buttons and segmented controls, and `aria-current="page"` for active navigation links to ensure their state is communicated to assistive technologies.
