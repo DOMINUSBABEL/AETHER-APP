@@ -9,3 +9,6 @@
 ## 2025-02-28 - [Escape Key Exit in Custom Modals]
 **Learning:** Custom modal components often overlook the standard expected behavior of allowing users to dismiss them via the `Escape` key, trapping keyboard users or forcing mouse interaction.
 **Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.
+## 2025-04-06 - [Missing Active State Communication]
+**Learning:** Found multiple instances (navigation items, language toggle, and deck selection buttons) where the visual active/selected state was clear through styling, but was completely invisible to screen readers, leaving visually impaired users unable to determine which options or tabs were currently active.
+**Action:** When creating segmented controls, toggles, or navigation bars, always pair visual active states with semantic ARIA attributes (`aria-pressed` for toggles, `aria-current="page"` for navigation).
