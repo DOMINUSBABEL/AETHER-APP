@@ -9,3 +9,7 @@
 ## 2025-02-28 - [Escape Key Exit in Custom Modals]
 **Learning:** Custom modal components often overlook the standard expected behavior of allowing users to dismiss them via the `Escape` key, trapping keyboard users or forcing mouse interaction.
 **Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.
+
+## 2025-04-08 - [aria-current for Navigation]
+**Learning:** Found that active navigation tabs lacked an explicit indicator for screen readers, relying only on visual cues (like text color and background) to convey the current page state.
+**Action:** Always add the `aria-current="page"` attribute dynamically to active navigation items so that screen readers correctly identify the user's current location within the app.
