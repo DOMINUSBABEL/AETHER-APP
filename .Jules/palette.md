@@ -9,3 +9,6 @@
 ## 2025-02-28 - [Escape Key Exit in Custom Modals]
 **Learning:** Custom modal components often overlook the standard expected behavior of allowing users to dismiss them via the `Escape` key, trapping keyboard users or forcing mouse interaction.
 **Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.
+## 2026-04-09 - [Dynamic ARIA states on custom React components]
+**Learning:** For dynamic accessible state, such as custom UI segmented toggles or active navigation links, traditional classes are visually useful but not announced properly. Screen readers require the explicit dynamic `aria-pressed` or `aria-current` attributes to bind the visual active state with screen reader feedback.
+**Action:** Consistently utilize dynamically evaluated `aria-current={isActive ? 'page' : undefined}` for navigation links and `aria-pressed={isActive}` for UI button toggles when styling them natively instead of using standard semantic input elements.
