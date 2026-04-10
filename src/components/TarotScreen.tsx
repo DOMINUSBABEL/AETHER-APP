@@ -92,6 +92,7 @@ export default function TarotScreen() {
                 <div className="grid grid-cols-1 gap-3">
                   <button
                     onClick={() => setDeckType('full')}
+                    aria-pressed={deckType === 'full'}
                     className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${deckType === 'full' ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   >
                     <Layers className="w-5 h-5" />
@@ -99,6 +100,7 @@ export default function TarotScreen() {
                   </button>
                   <button
                     onClick={() => setDeckType('major')}
+                    aria-pressed={deckType === 'major'}
                     className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${deckType === 'major' ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   >
                     <Sparkles className="w-5 h-5" />
@@ -117,6 +119,7 @@ export default function TarotScreen() {
                     <button
                       key={type}
                       onClick={() => setSpreadType(type)}
+                      aria-pressed={spreadType === type}
                       className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${spreadType === type ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     >
                       <div className="flex gap-1">
