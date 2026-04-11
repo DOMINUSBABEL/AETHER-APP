@@ -62,7 +62,7 @@ export default function DailyScreen() {
       className="px-6 space-y-10"
     >
       {/* Zodiac Selector (Visual Only) */}
-      <section>
+      <section aria-hidden="true">
         <div className="flex overflow-x-auto space-x-8 pb-4 scroll-smooth no-scrollbar">
           {zodiacSigns.map((sign, i) => (
             <div key={sign} className={`flex flex-col items-center space-y-2 shrink-0 ${i === activeSignIndex ? 'text-primary' : 'opacity-30'}`}>
