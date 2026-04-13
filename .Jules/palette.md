@@ -8,4 +8,12 @@
 
 ## 2025-02-28 - [Escape Key Exit in Custom Modals]
 **Learning:** Custom modal components often overlook the standard expected behavior of allowing users to dismiss them via the `Escape` key, trapping keyboard users or forcing mouse interaction.
-**Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.## 2023-11-20 - [ARIA Pressed states on Toggles]\n**Learning:** Found several instances of custom segmented controls and toggle buttons (language selection, deck selection, spread type) that visually indicated active state via classes but lacked semantic ARIA attributes, leaving screen reader users unaware of the selected option.\n**Action:** Always add `aria-pressed={isActive}` to custom toggle buttons or segmented control options to ensure their active state is properly communicated to assistive technologies.
+**Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.
+
+## 2023-11-20 - [ARIA Pressed states on Toggles]
+**Learning:** Found several instances of custom segmented controls and toggle buttons (language selection, deck selection, spread type) that visually indicated active state via classes but lacked semantic ARIA attributes, leaving screen reader users unaware of the selected option.
+**Action:** Always add `aria-pressed={isActive}` to custom toggle buttons or segmented control options to ensure their active state is properly communicated to assistive technologies.
+
+## 2024-05-18 - [Visual List Semantics]
+**Learning:** Found instances where visual lists (like the horizontal scrolling Zodiac signs selector) were using purely visual cues (color changes and rendering dots) to indicate active state, without any semantic list structure (`role="list"`, `role="listitem"`) or active state indicators (`aria-current="true"`) for screen readers.
+**Action:** When building visual state indicators or selectors that function as a list, explicitly define semantic roles (`list`/`listitem`) and use `aria-current="true"` or `aria-selected="true"` to communicate the active item to assistive technologies, rather than relying solely on visual classes.
