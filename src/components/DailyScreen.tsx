@@ -62,10 +62,10 @@ export default function DailyScreen() {
       className="px-6 space-y-10"
     >
       {/* Zodiac Selector (Visual Only) */}
-      <section>
-        <div className="flex overflow-x-auto space-x-8 pb-4 scroll-smooth no-scrollbar">
+      <section aria-label="Zodiac Signs">
+        <div role="list" className="flex overflow-x-auto space-x-8 pb-4 scroll-smooth no-scrollbar">
           {zodiacSigns.map((sign, i) => (
-            <div key={sign} className={`flex flex-col items-center space-y-2 shrink-0 ${i === activeSignIndex ? 'text-primary' : 'opacity-30'}`}>
+            <div role="listitem" aria-current={i === activeSignIndex ? 'true' : undefined} key={sign} className={`flex flex-col items-center space-y-2 shrink-0 ${i === activeSignIndex ? 'text-primary' : 'opacity-30'}`}>
               <span className={`font-label text-[10px] tracking-widest uppercase ${i === activeSignIndex ? 'font-bold tracking-[0.2em]' : ''}`}>{sign}</span>
               {i === activeSignIndex && <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(233,195,73,0.6)] mt-1"></div>}
             </div>
