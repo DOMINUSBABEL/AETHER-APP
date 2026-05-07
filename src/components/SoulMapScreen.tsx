@@ -43,7 +43,7 @@ export default function SoulMapScreen() {
 
       {/* Abstract Chart Graphic */}
       <section className="flex justify-center py-4">
-        <div className="relative w-64 h-64 rounded-full border border-primary/10 flex items-center justify-center alchemical-gradient">
+        <div aria-hidden="true" className="relative w-64 h-64 rounded-full border border-primary/10 flex items-center justify-center alchemical-gradient">
           <div className="absolute inset-4 rounded-full border border-primary/5 opacity-40"></div>
           <div className="absolute inset-12 rounded-full border border-primary/10"></div>
           
