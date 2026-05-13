@@ -9,3 +9,7 @@
 ## 2025-02-28 - [Escape Key Exit in Custom Modals]
 **Learning:** Custom modal components often overlook the standard expected behavior of allowing users to dismiss them via the `Escape` key, trapping keyboard users or forcing mouse interaction.
 **Action:** Whenever implementing a custom modal or overlay, always add a window-level keydown event listener to handle the `Escape` key and trigger the component's close function.## 2023-11-20 - [ARIA Pressed states on Toggles]\n**Learning:** Found several instances of custom segmented controls and toggle buttons (language selection, deck selection, spread type) that visually indicated active state via classes but lacked semantic ARIA attributes, leaving screen reader users unaware of the selected option.\n**Action:** Always add `aria-pressed={isActive}` to custom toggle buttons or segmented control options to ensure their active state is properly communicated to assistive technologies.
+
+## 2024-05-13 - [Keyboard Accessibility for Scrollable Containers]
+**Learning:** Horizontally scrollable areas (like the Zodiac Selector) without interactive elements inside them are completely skipped by keyboard navigation, making the content inaccessible to keyboard users unless explicitly managed.
+**Action:** Always add `tabIndex={0}` to containers with `overflow-x-auto` along with `focus-visible` utility classes so keyboard users can focus and scroll the container using arrow keys. Also, ensure these visual lists use semantic roles (`role="list"`, `role="listitem"`) and `aria-label` or `aria-current` as necessary.
