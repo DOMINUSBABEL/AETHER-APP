@@ -61,13 +61,23 @@ export default function DailyScreen() {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className="px-6 space-y-10"
     >
-      {/* Zodiac Selector (Visual Only) */}
+      {/* Zodiac Selector */}
       <section>
-        <div className="flex overflow-x-auto space-x-8 pb-4 scroll-smooth no-scrollbar">
+        <div
+          role="list"
+          aria-label={t('daily.zodiac.label') || 'Zodiac Signs'}
+          tabIndex={0}
+          className="flex overflow-x-auto space-x-8 pb-4 scroll-smooth no-scrollbar focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
+        >
           {zodiacSigns.map((sign, i) => (
-            <div key={sign} className={`flex flex-col items-center space-y-2 shrink-0 ${i === activeSignIndex ? 'text-primary' : 'opacity-30'}`}>
+            <div
+              key={sign}
+              role="listitem"
+              aria-current={i === activeSignIndex ? 'true' : undefined}
+              className={`flex flex-col items-center space-y-2 shrink-0 ${i === activeSignIndex ? 'text-primary' : 'opacity-30'}`}
+            >
               <span className={`font-label text-[10px] tracking-widest uppercase ${i === activeSignIndex ? 'font-bold tracking-[0.2em]' : ''}`}>{sign}</span>
-              {i === activeSignIndex && <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(233,195,73,0.6)] mt-1"></div>}
+              {i === activeSignIndex && <div aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(233,195,73,0.6)] mt-1"></div>}
             </div>
           ))}
         </div>
