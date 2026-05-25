@@ -92,6 +92,8 @@ const translations = {
     'settings.language.label': 'Idioma',
     'settings.language.desc': 'Selecciona el idioma de la interfaz.',
     'settings.close': 'Cerrar',
+    'daily.zodiac.list': 'Signos del Zodiaco',
+    'nav.settings': 'Configuración',
   },
   en: {
     'login.title': 'AETHER',
@@ -176,6 +178,8 @@ const translations = {
     'settings.language.label': 'Language',
     'settings.language.desc': 'Select the interface language.',
     'settings.close': 'Close',
+    'daily.zodiac.list': 'Zodiac Signs',
+    'nav.settings': 'Settings',
   }
 };
 
