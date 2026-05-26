@@ -5,6 +5,8 @@ interface DateContextType {
   setUserDate: (date: string) => void;
   partnerDate: string; // YYYY-MM-DD
   setPartnerDate: (date: string) => void;
+  userTime: string; // HH:MM
+  setUserTime: (time: string) => void;
   seed: number;
   partnerSeed: number;
 }
@@ -14,6 +16,7 @@ const DateContext = createContext<DateContextType | undefined>(undefined);
 export const DateProvider = ({ children }: { children: ReactNode }) => {
   const [userDate, setUserDate] = useState<string>(new Date().toISOString().split('T')[0]);
   const [partnerDate, setPartnerDate] = useState<string>('');
+  const [userTime, setUserTime] = useState<string>('12:00');
 
   const getSeed = (dateStr: string) => {
     if (!dateStr) return 0;
@@ -30,7 +33,7 @@ export const DateProvider = ({ children }: { children: ReactNode }) => {
   const partnerSeed = getSeed(partnerDate);
 
   return (
-    <DateContext.Provider value={{ userDate, setUserDate, partnerDate, setPartnerDate, seed, partnerSeed }}>
+    <DateContext.Provider value={{ userDate, setUserDate, partnerDate, setPartnerDate, userTime, setUserTime, seed, partnerSeed }}>
       {children}
     </DateContext.Provider>
   );

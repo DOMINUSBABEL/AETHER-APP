@@ -41,7 +41,7 @@ export default function App() {
         <header className="md:w-64 md:h-screen md:relative absolute top-0 w-full z-50 flex md:flex-col items-center justify-between md:justify-start px-6 md:px-0 py-4 md:py-8 h-16 md:h-auto bg-background/80 md:bg-surface-container-lowest/50 backdrop-blur-md border-b md:border-b-0 md:border-r border-outline-variant/10">
           <div className="flex items-center gap-3 md:mb-12 md:px-8">
             <Orbit className="text-primary w-5 h-5 md:w-6 md:h-6" />
-            <h1 className="font-headline tracking-widest text-primary text-sm md:text-base font-bold uppercase">
+            <h1 className="font-headline tracking-widest text-primary text-glow text-sm md:text-base font-bold uppercase">
               {t('login.title')}
             </h1>
           </div>

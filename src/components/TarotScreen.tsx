@@ -1,28 +1,40 @@
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sun, Moon, Star, RefreshCw, Layers, Sparkles, ArrowLeft } from 'lucide-react';
+import { Layers, Sparkles, ArrowLeft, RefreshCw, HelpCircle, FileText } from 'lucide-react';
 import { getSeededRandomCards, TarotCardData } from '../data/tarotDeck';
 import { useDateContext } from '../context/DateContext';
 import { useLanguage } from '../context/LanguageContext';
+import TarotCard3D from './TarotCard3D';
+import { createSeededRandom } from '../utils/random';
+import { getLifePathNumber, getSunSign, generateTarotSymmetryReading } from '../utils/mysticAlgorithms';
 
 export default function TarotScreen() {
-  const { seed, partnerSeed, partnerDate } = useDateContext();
-  const { t } = useLanguage();
+  const { seed, userDate } = useDateContext();
+  const { t, language } = useLanguage();
   const [isSetup, setIsSetup] = useState(true);
   const [drawOffset, setDrawOffset] = useState(0);
   const [deckType, setDeckType] = useState<'full' | 'major'>('full');
   const [spreadType, setSpreadType] = useState<'1' | '3' | '5'>('3');
   const [spread, setSpread] = useState<TarotCardData[]>([]);
+  const [reversals, setReversals] = useState<boolean[]>([]);
+  const [question, setQuestion] = useState('');
   const [isDrawing, setIsDrawing] = useState(false);
 
-  // Update spread when seed, drawOffset, deckType, or spreadType changes
+  // Update spread and reversals when inputs change
   useEffect(() => {
     if (isSetup) return;
     const typeOffset = spreadType === '1' ? 0 : spreadType === '3' ? 100 : 200;
     const deckOffset = deckType === 'major' ? 500 : 0;
-    const currentSeed = seed;
     const count = parseInt(spreadType, 10);
-    setSpread(getSeededRandomCards(count, currentSeed, drawOffset + typeOffset + deckOffset, deckType));
+    
+    // Draw seeded cards
+    const cards = getSeededRandomCards(count, seed, drawOffset + typeOffset + deckOffset, deckType);
+    setSpread(cards);
+
+    // Calculate seeded reversals (30% chance for reverse polarity/shadow)
+    const randFunc = createSeededRandom(seed + (drawOffset + 5) * 83 + typeOffset);
+    const cardReversals = Array.from({ length: count }).map(() => randFunc() > 0.7);
+    setReversals(cardReversals);
   }, [seed, drawOffset, spreadType, deckType, isSetup]);
 
   const startReading = () => {
@@ -30,7 +42,7 @@ export default function TarotScreen() {
     setIsDrawing(true);
     setTimeout(() => {
       setIsDrawing(false);
-    }, 100);
+    }, 800);
   };
 
   const drawNewCards = () => {
@@ -38,27 +50,66 @@ export default function TarotScreen() {
     setTimeout(() => {
       setDrawOffset(prev => prev + 1);
       setIsDrawing(false);
-    }, 500);
+    }, 800);
   };
 
   const backToSetup = () => {
     setIsSetup(true);
     setSpread([]);
+    setReversals([]);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3
+  // Generate dynamic algorithmic reading synthesis
+  const renderReadingText = () => {
+    if (spread.length === 0 || reversals.length === 0) return null;
+
+    const lifePath = getLifePathNumber(userDate);
+    const sunSign = getSunSign(userDate);
+    const positions = spreadType === '1' 
+      ? ['MENSAJE'] 
+      : spreadType === '3' 
+        ? [t('tarot.past'), t('tarot.present'), t('tarot.future')] 
+        : [t('tarot.pos.cross.1'), t('tarot.pos.cross.2'), t('tarot.pos.cross.3'), t('tarot.pos.cross.4'), t('tarot.pos.cross.5')];
+
+    const { reading } = generateTarotSymmetryReading(
+      spread,
+      reversals,
+      positions,
+      question,
+      lifePath,
+      sunSign,
+      language
+    );
+
+    // Parse minimal markdown structure into beautiful styled HTML paragraphs
+    return reading.split('\n\n').map((block, i) => {
+      if (block.startsWith('###')) {
+        return (
+          <h3 key={i} className="font-headline text-xl text-primary mt-8 mb-4 border-b border-primary/20 pb-2 tracking-wide uppercase">
+            {block.replace('###', '').trim()}
+          </h3>
+        );
       }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50, rotateY: 90 },
-    show: { opacity: 1, y: 0, rotateY: 0, transition: { duration: 0.6, ease: "easeOut" } }
+      if (block.startsWith('####')) {
+        return (
+          <h4 key={i} className="font-label text-sm text-secondary font-bold mt-6 mb-3 tracking-widest uppercase">
+            {block.replace('####', '').trim()}
+          </h4>
+        );
+      }
+      if (block.startsWith('*')) {
+        return (
+          <div key={i} className="pl-4 border-l-2 border-primary/40 my-3 text-on-surface-variant leading-relaxed text-sm font-light italic">
+            {block.replace(/^\*\s*/, '')}
+          </div>
+        );
+      }
+      return (
+        <p key={i} className="text-on-surface-variant font-body text-sm leading-relaxed mb-4 font-light">
+          {block}
+        </p>
+      );
+    });
   };
 
   return (
@@ -76,40 +127,57 @@ export default function TarotScreen() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="max-w-md mx-auto mt-10"
+            className="max-w-md mx-auto mt-6"
           >
-            <div className="text-center mb-10">
-              <span className="font-label text-[9px] tracking-[0.3em] uppercase text-tertiary mb-3 block">{t('tarot.header.subtitle')}</span>
-              <h2 className="font-headline text-3xl text-primary tracking-tight">{t('tarot.setup.title')}</h2>
+            <div className="text-center mb-8">
+              <span className="font-label text-[9px] tracking-[0.3em] uppercase text-tertiary mb-3 block">
+                {t('tarot.header.subtitle')}
+              </span>
+              <h2 className="font-headline text-4xl text-primary tracking-tight">{t('tarot.setup.title')}</h2>
             </div>
 
-            <div className="space-y-8 glass-card p-8 rounded-2xl border border-primary/20">
+            <div className="space-y-6 glass-card p-6 md:p-8 rounded-2xl border border-primary/20">
+              {/* Question Input */}
+              <div className="relative group">
+                <label className="flex items-center gap-2 font-label text-[10px] tracking-widest uppercase text-primary mb-3 ml-1">
+                  <HelpCircle className="w-3.5 h-3.5" />
+                  {t('tarot.question.label')}
+                </label>
+                <textarea
+                  value={question}
+                  onChange={(e) => setQuestion(e.target.value)}
+                  placeholder={t('tarot.question.placeholder')}
+                  rows={2}
+                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner placeholder:text-on-surface-variant/40 resize-none font-body leading-relaxed"
+                />
+              </div>
+
               {/* Deck Selection */}
               <div>
-                <label className="block font-label text-[10px] tracking-widest uppercase text-primary mb-4">
+                <label className="block font-label text-[10px] tracking-widest uppercase text-primary mb-3">
                   {t('tarot.setup.deck')}
                 </label>
                 <div className="grid grid-cols-1 gap-3">
                   <button
                     onClick={() => setDeckType('full')}
-                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${deckType === 'full' ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${deckType === 'full' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
                   >
                     <Layers className="w-5 h-5" />
-                    <span className="font-body text-sm">{t('tarot.setup.deck.full')}</span>
+                    <span className="font-label text-xs uppercase tracking-widest">{t('tarot.setup.deck.full')}</span>
                   </button>
                   <button
                     onClick={() => setDeckType('major')}
-                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${deckType === 'major' ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${deckType === 'major' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
                   >
                     <Sparkles className="w-5 h-5" />
-                    <span className="font-body text-sm">{t('tarot.setup.deck.major')}</span>
+                    <span className="font-label text-xs uppercase tracking-widest">{t('tarot.setup.deck.major')}</span>
                   </button>
                 </div>
               </div>
 
               {/* Spread Selection */}
               <div>
-                <label className="block font-label text-[10px] tracking-widest uppercase text-primary mb-4">
+                <label className="block font-label text-[10px] tracking-widest uppercase text-primary mb-3">
                   {t('tarot.setup.spread')}
                 </label>
                 <div className="grid grid-cols-1 gap-3">
@@ -117,14 +185,14 @@ export default function TarotScreen() {
                     <button
                       key={type}
                       onClick={() => setSpreadType(type)}
-                      className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${spreadType === type ? 'border-primary bg-primary/10 text-primary' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                      className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${spreadType === type ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
                     >
                       <div className="flex gap-1">
                         {Array.from({ length: parseInt(type) }).map((_, i) => (
-                          <div key={i} className="w-3 h-4 rounded-sm border border-current opacity-70"></div>
+                          <div key={i} className="w-2.5 h-3.5 rounded-sm border border-current opacity-70"></div>
                         ))}
                       </div>
-                      <span className="font-body text-sm">{t(`tarot.setup.spread.${type}`)}</span>
+                      <span className="font-label text-xs uppercase tracking-widest">{t(`tarot.setup.spread.${type}`)}</span>
                     </button>
                   ))}
                 </div>
@@ -132,7 +200,7 @@ export default function TarotScreen() {
 
               <button
                 onClick={startReading}
-                className="w-full py-4 rounded-xl bg-primary text-on-primary font-label text-xs tracking-widest uppercase hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+                className="w-full py-4 mt-2 rounded-xl bg-primary text-on-primary font-label text-xs tracking-widest uppercase hover:bg-primary-fixed hover:shadow-[0_0_25px_rgba(212,175,55,0.35)] transition-all duration-300 shadow-lg shadow-primary/20 active:scale-[0.98]"
               >
                 {t('tarot.setup.start')}
               </button>
@@ -146,114 +214,100 @@ export default function TarotScreen() {
             exit={{ opacity: 0 }}
           >
             {/* Header */}
-            <section className="mb-10 text-center flex flex-col items-center">
+            <section className="mb-8 text-center flex flex-col items-center">
               <button 
                 onClick={backToSetup}
-                className="mb-6 inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase"
+                className="mb-4 inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label text-[10px] tracking-widest uppercase"
               >
-                <ArrowLeft className="w-3 h-3" />
+                <ArrowLeft className="w-3.5 h-3.5" />
                 {t('tarot.setup.back')}
               </button>
               
-              <span className="font-label text-[9px] tracking-[0.3em] uppercase text-tertiary mb-3 block">
+              <span className="font-label text-[9px] tracking-[0.3em] uppercase text-tertiary mb-2 block">
                 {deckType === 'major' ? t('tarot.setup.deck.major') : t('tarot.setup.deck.full')}
               </span>
-              <h2 className="font-headline text-2xl text-primary tracking-tight mb-6">
+              <h2 className="font-headline text-3xl text-primary tracking-tight mb-4">
                 {t(`tarot.setup.spread.${spreadType}`)}
               </h2>
 
               <button 
                 onClick={drawNewCards}
                 disabled={isDrawing}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 text-primary font-label text-[10px] tracking-widest uppercase hover:bg-primary/10 transition-colors disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/30 text-primary font-label text-[10px] tracking-widest uppercase hover:bg-primary/10 transition-all disabled:opacity-50 active:scale-95"
               >
-                <RefreshCw className={`w-3 h-3 ${isDrawing ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`w-3.5 h-3.5 ${isDrawing ? 'animate-spin' : ''}`} />
                 {t('tarot.button.new')}
               </button>
             </section>
 
-            {/* Spread Layout */}
-            {!isDrawing && spread.length > 0 && (
-              <motion.div 
-                variants={containerVariants}
-                initial="hidden"
-                animate="show"
-                className={`grid grid-cols-1 gap-12 md:gap-6 ${spreadType === '1' ? 'md:grid-cols-1 max-w-md mx-auto' : spreadType === '3' ? 'md:grid-cols-3' : 'md:grid-cols-5'}`}
-              >
-                {spread.map((card, index) => {
-                  let title = `Card ${index + 1}`;
-                  if (spreadType === '3') {
-                    title = index === 0 ? t('tarot.past') : index === 1 ? t('tarot.present') : t('tarot.future');
-                  } else if (spreadType === '5') {
-                    const titles = [t('tarot.pos.cross.1'), t('tarot.pos.cross.2'), t('tarot.pos.cross.3'), t('tarot.pos.cross.4'), t('tarot.pos.cross.5')];
-                    title = titles[index];
-                  }
+            {/* Reading View */}
+            {isDrawing ? (
+              <div className="flex flex-col items-center justify-center py-20 space-y-4">
+                <div className="w-10 h-10 rounded-full border-t-2 border-r-2 border-primary animate-spin" />
+                <span className="font-label text-[10px] tracking-widest text-primary uppercase animate-pulse">Mezclando los Arquetipos...</span>
+              </div>
+            ) : (
+              spread.length > 0 && reversals.length > 0 && (
+                <div className="space-y-12">
+                  {/* Grid of 3D Cards */}
+                  <div 
+                    className={`grid grid-cols-1 gap-12 pt-4 justify-center items-stretch ${spreadType === '1' ? 'max-w-xs mx-auto' : spreadType === '3' ? 'md:grid-cols-3 max-w-4xl mx-auto' : 'md:grid-cols-5 max-w-6xl mx-auto'}`}
+                  >
+                    {spread.map((card, index) => {
+                      let cardTitle = `CARTA ${index + 1}`;
+                      if (spreadType === '3') {
+                        cardTitle = index === 0 ? t('tarot.past') : index === 1 ? t('tarot.present') : t('tarot.future');
+                      } else if (spreadType === '5') {
+                        const titles = [t('tarot.pos.cross.1'), t('tarot.pos.cross.2'), t('tarot.pos.cross.3'), t('tarot.pos.cross.4'), t('tarot.pos.cross.5')];
+                        cardTitle = titles[index];
+                      }
 
-                  return (
-                    <motion.div key={`${card.id}-${drawOffset}`} variants={itemVariants} className="h-full">
-                      <TarotCard 
-                        position={['I', 'II', 'III', 'IV', 'V'][index]}
-                        title={title}
-                        cardName={card.name}
-                        polarity={t('tarot.light')}
-                        subtitle={card.archetype}
-                        description={card.descriptionLight}
-                        imageUrl={card.imageUrl}
-                        icon={<Star className="w-4 h-4" />}
-                        colorClass="text-primary"
-                        borderColorClass="border-primary/30"
-                      />
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
+                      return (
+                        <div key={`${card.id}-${drawOffset}`} className="flex justify-center h-full">
+                          <TarotCard3D
+                            cardId={card.id}
+                            cardName={card.name}
+                            suit={card.suit}
+                            isReversed={reversals[index]}
+                            position={['I', 'II', 'III', 'IV', 'V'][index]}
+                            title={cardTitle}
+                            subtitle={card.archetype}
+                            description={reversals[index] ? card.descriptionShadow : card.descriptionLight}
+                            colorClass="text-primary"
+                            borderColorClass="border-primary/30"
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Algorithmic Sinergy Veredict Box */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.6 }}
+                    className="glass-card p-6 md:p-8 rounded-2xl border border-primary/20 shadow-2xl relative overflow-hidden max-w-4xl mx-auto"
+                  >
+                    <div className="absolute top-[-20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[80px]" />
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 border border-primary/25">
+                        <FileText className="w-5 h-5 text-primary" />
+                      </div>
+                      <h3 className="font-headline text-2xl text-primary tracking-wide">
+                        {t('tarot.reading.title')}
+                      </h3>
+                    </div>
+
+                    <div className="space-y-4">
+                      {renderReadingText()}
+                    </div>
+                  </motion.div>
+                </div>
+              )
             )}
           </motion.div>
         )}
       </AnimatePresence>
     </motion.div>
-  );
-}
-
-function TarotCard({ 
-  position, title, cardName, polarity, subtitle, description, imageUrl, icon, colorClass, borderColorClass, isShadow = false 
-}: { 
-  position: string, title: string, cardName: string, polarity: string, subtitle: string, description: string, imageUrl: string, icon: ReactNode, colorClass: string, borderColorClass: string, isShadow?: boolean
-}) {
-  const { t } = useLanguage();
-  return (
-    <div className="relative group h-full perspective-1000">
-      <div className={`absolute -top-3 left-0 font-label text-[9px] tracking-[0.2em] uppercase ${colorClass} opacity-60 z-10`}>
-        {t('tarot.position')} {position} • {title}
-      </div>
-      <div className={`glass-card h-full p-5 rounded-xl border ${borderColorClass} ${!isShadow ? 'celestial-glow' : 'shadow-[0_0_30px_rgba(255,183,123,0.05)]'} transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl flex flex-col`}>
-        
-        {/* Card Image Placeholder */}
-        <div className="aspect-[2/3] w-full mb-6 overflow-hidden rounded-lg bg-surface-container-lowest relative shrink-0">
-          <img 
-            src={imageUrl} 
-            alt={cardName} 
-            className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isShadow ? 'grayscale opacity-70 mix-blend-luminosity' : 'opacity-90'}`}
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
-          <div className="absolute bottom-4 left-0 right-0 text-center px-4">
-             <span className="font-headline text-2xl text-white text-glow tracking-wide">{cardName}</span>
-          </div>
-        </div>
-
-        <div className="space-y-3 flex flex-col flex-grow">
-          <div className="flex items-start justify-between gap-4">
-            <h3 className={`font-headline text-lg leading-tight ${colorClass} ${!isShadow ? 'text-glow' : ''}`}>{subtitle}</h3>
-            <span className={`font-label text-[8px] px-2 py-0.5 border ${borderColorClass} ${colorClass} rounded-full flex items-center gap-1 shrink-0 mt-1`}>
-              {icon} {polarity.toUpperCase()}
-            </span>
-          </div>
-          <p className="text-on-surface-variant text-sm leading-relaxed font-light flex-grow">
-            {description}
-          </p>
-        </div>
-      </div>
-    </div>
   );
 }
