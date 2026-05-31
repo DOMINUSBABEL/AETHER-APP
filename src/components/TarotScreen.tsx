@@ -139,16 +139,17 @@ export default function TarotScreen() {
             <div className="space-y-6 glass-card p-6 md:p-8 rounded-2xl border border-primary/20">
               {/* Question Input */}
               <div className="relative group">
-                <label className="flex items-center gap-2 font-label text-[10px] tracking-widest uppercase text-primary mb-3 ml-1">
+                <label htmlFor="tarot-question" className="flex items-center gap-2 font-label text-[10px] tracking-widest uppercase text-primary mb-3 ml-1">
                   <HelpCircle className="w-3.5 h-3.5" />
                   {t('tarot.question.label')}
                 </label>
                 <textarea
+                  id="tarot-question"
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   placeholder={t('tarot.question.placeholder')}
                   rows={2}
-                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner placeholder:text-on-surface-variant/40 resize-none font-body leading-relaxed"
+                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner placeholder:text-on-surface-variant/40 resize-none font-body leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 />
               </div>
 

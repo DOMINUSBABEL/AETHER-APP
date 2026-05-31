@@ -13,3 +13,7 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+
+## 2025-05-31 - Label associations and Input Focus states
+**Learning:** Found several input elements (`time`, `date`, `textarea`) lacking `id` attributes that matched their corresponding `<label>`'s `htmlFor` attribute. Some inputs lacked `focus-visible` classes entirely while others used them, creating inconsistent keyboard navigation visual feedback.
+**Action:** When adding or updating inputs (like `time` or `textarea`), always verify that `<label htmlFor="xyz">` matches `<input id="xyz" />`. Always ensure consistent application of `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background` on form inputs.
