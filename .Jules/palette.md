@@ -13,3 +13,6 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+## 2026-06-01 - Custom Button Groups and Label Linking
+**Learning:** React elements formatted to look like standard controls (e.g. horizontal language toggles) often require manual ARIA `role="group"` grouping, while labels without properly linked inputs (`htmlFor` matching input `id`) create silent accessibility failures that don't fail build scripts.
+**Action:** When working on form inputs, always cross-reference that both `<label htmlFor="X">` and `<input id="X">` exist to properly link them. For custom button groups, ensure an encompassing `role="group"` exists.
