@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Sun, Moon, ArrowUpCircle, BookOpen, Heart } from 'lucide-react';
+import { ReactNode } from 'react';
 import { useDateContext } from '../context/DateContext';
 import { useLanguage } from '../context/LanguageContext';
 import { 
