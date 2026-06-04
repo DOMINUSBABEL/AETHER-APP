@@ -13,3 +13,7 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+
+## 2026-06-04 - Proper accessible button groups
+**Learning:** When using custom visual selectors that behave like native radio buttons or selects, they must be wrapped in `role="group"` with `aria-labelledby` and use `aria-pressed` to denote active state, rather than using disconnected `<label>` tags.
+**Action:** Always wrap custom button selectors in a group role and apply `aria-pressed`.
