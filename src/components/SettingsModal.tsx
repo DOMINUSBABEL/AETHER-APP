@@ -66,10 +66,11 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <label htmlFor="settings-user-time" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.time.label')}
                   </label>
                   <input 
+                    id="settings-user-time"
                     type="time" 
                     value={userTime}
                     onChange={(e) => setUserTime(e.target.value)}
