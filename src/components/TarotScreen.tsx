@@ -139,11 +139,12 @@ export default function TarotScreen() {
             <div className="space-y-6 glass-card p-6 md:p-8 rounded-2xl border border-primary/20">
               {/* Question Input */}
               <div className="relative group">
-                <label className="flex items-center gap-2 font-label text-[10px] tracking-widest uppercase text-primary mb-3 ml-1">
+                <label htmlFor="question" className="flex items-center gap-2 font-label text-[10px] tracking-widest uppercase text-primary mb-3 ml-1">
                   <HelpCircle className="w-3.5 h-3.5" />
                   {t('tarot.question.label')}
                 </label>
                 <textarea
+                  id="question"
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   placeholder={t('tarot.question.placeholder')}
