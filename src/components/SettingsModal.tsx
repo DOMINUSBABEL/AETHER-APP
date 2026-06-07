@@ -66,10 +66,11 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <label htmlFor="settings-user-time" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.time.label')}
                   </label>
                   <input 
+                    id="settings-user-time"
                     type="time" 
                     value={userTime}
                     onChange={(e) => setUserTime(e.target.value)}
@@ -81,7 +82,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <label htmlFor="settings-partner-date" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.partnerDate.label')}
                   </label>
                   <input 
@@ -97,10 +98,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <label id="settings-language-label" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.language.label')}
                   </label>
-                  <div className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
+                  <div role="group" aria-labelledby="settings-language-label" className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
                     <button
                       onClick={() => setLanguage('es')}
                       aria-pressed={language === 'es'}
