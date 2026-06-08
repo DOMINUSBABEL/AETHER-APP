@@ -13,3 +13,7 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+
+## 2024-06-08 - Keyboard Accessibility and Semantic Roles for Horizontal Visual Lists
+**Learning:** For custom visual lists that scroll horizontally (like the Zodiac Tracker in DailyScreen), users rely on explicit keyboard focus (`tabIndex={0}`) and screen readers require semantic groupings (`role="list"`, `role="listitem"`, and `aria-current="true"` on the active item). Without these, the list is effectively invisible to keyboard and screen reader users since it's just `div` elements.
+**Action:** When implementing custom visual selectors or horizontally scrollable lists, always apply `tabIndex={0}` and Tailwind focus classes to the container, and use explicit `list`/`listitem` roles coupled with `aria-current` to convey state.
