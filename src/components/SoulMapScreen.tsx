@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { motion } from 'motion/react';
 import { Sun, Moon, ArrowUpCircle, BookOpen, Heart } from 'lucide-react';
 import { useDateContext } from '../context/DateContext';
