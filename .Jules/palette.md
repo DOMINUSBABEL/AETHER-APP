@@ -13,3 +13,6 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+## 2024-11-20 - Ensure horizontal custom selectors are properly structured for screen readers
+**Learning:** In custom forms using horizontal button groups without native `<select>` or `<fieldset>` tags (like the language selector in LoginScreen and SettingsModal), screen readers may fail to announce the label with the active state. Wrapping custom buttons in a `<div>` with `role="group"` and explicitly mapping the label via `aria-label` or `aria-labelledby` resolves this accessibility issue effectively.
+**Action:** When creating custom horizontally-aligned button groups (e.g., toggles or language switches) acting as choices, always wrap the buttons in a `role="group"` container with an explicit `aria-label` or `aria-labelledby` connecting to its descriptive text to ensure proper announcement by screen readers.
