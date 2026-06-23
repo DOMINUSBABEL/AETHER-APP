@@ -13,3 +13,7 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+
+## 2026-06-23 - Disconnected Grouped Buttons & Form Labels
+**Learning:** Found a recurring pattern where custom segmented controls (like the language selectors) were wrapped in generic `div` containers without proper semantic grouping, breaking screen reader context for related options. Additionally, several inputs were missing direct `htmlFor` linkages and keyboard focus styles.
+**Action:** Always wrap custom button groups or horizontal toggles in a container with `role="group"` and label them appropriately (e.g., using `aria-labelledby` pointing to the section label, or a direct `aria-label`). Ensure all form inputs have matching `id` attributes properly linked to their `<label htmlFor="...">`, and consistently apply keyboard focus utility classes (`focus-visible:ring-2`, etc.).
