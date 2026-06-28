@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'motion/react';
 import { Sun, Moon, ArrowUpCircle, BookOpen, Heart } from 'lucide-react';
 import { useDateContext } from '../context/DateContext';
@@ -353,7 +354,7 @@ export default function SoulMapScreen() {
   );
 }
 
-function PlanetCard({ title, subtitle, icon, colorClass, bgClass, description }: { title: string, subtitle: string, icon: ReactNode, colorClass: string, bgClass: string, description: ReactNode }) {
+function PlanetCard({ title, subtitle, icon, colorClass, bgClass, description }: { title: string, subtitle: string, icon: React.ReactNode, colorClass: string, bgClass: string, description: React.ReactNode }) {
   return (
     <div className="bg-surface-container-low rounded-xl p-6 border border-outline-variant/5 hover:bg-surface-container transition-colors duration-300 h-full flex flex-col justify-between">
       <div>
