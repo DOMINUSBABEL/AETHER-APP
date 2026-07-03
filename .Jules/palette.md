@@ -13,3 +13,6 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+## 2024-07-24 - Grouping language selectors
+**Learning:** In a custom segmented control formatted to look like standard buttons (such as the language selectors), providing disconnected `<label>`s alongside the buttons causes them to be ignored or misassociated by screen readers.
+**Action:** When working with horizontally scrollable or horizontally positioned custom UI controls that require an explicit overarching descriptor (e.g., language selection), ensure to wrap them in an element containing `role="group"` and label it contextually via `aria-label` or `aria-labelledby`.
