@@ -13,3 +13,7 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+
+## 2024-07-05 - [Form Controls Grouping and Label Linking]
+**Learning:** For custom segmented controls configured via `div`s and buttons (like Deck and Spread selections in TarotScreen or Language selector in Settings/Login), placing a disconnected `<label>` above them is invalid HTML and not read by screen readers.
+**Action:** Replace the disconnected `<label>` with a `<div>` with an `id`, and wrap the button groups in a container with `role="group"` and `aria-labelledby="[id]"` to establish semantic groupings. Use `aria-pressed` for the toggle button states.
