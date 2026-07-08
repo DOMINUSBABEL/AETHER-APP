@@ -66,14 +66,15 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <label htmlFor="settings-user-time" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.time.label')}
                   </label>
                   <input 
+                    id="settings-user-time"
                     type="time" 
                     value={userTime}
                     onChange={(e) => setUserTime(e.target.value)}
-                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-colors shadow-inner"
+                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-colors shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   />
                   <p className="text-[10px] text-on-surface-variant mt-2 italic ml-1">
                     {t('settings.time.desc')}
@@ -97,10 +98,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <div id="language-label" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.language.label')}
-                  </label>
-                  <div className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
+                  </div>
+                  <div role="group" aria-labelledby="language-label" className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
                     <button
                       onClick={() => setLanguage('es')}
                       aria-pressed={language === 'es'}

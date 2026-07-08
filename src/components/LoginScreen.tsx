@@ -57,7 +57,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               </div>
             </div>
             <div className="relative group">
-              <label className="block font-label text-[10px] tracking-widest uppercase text-outline mb-2 ml-1 transition-colors group-focus-within:text-primary">
+              <label htmlFor="user-time" className="block font-label text-[10px] tracking-widest uppercase text-outline mb-2 ml-1 transition-colors group-focus-within:text-primary">
                 {t('settings.time.label')}
               </label>
               <div className="relative">
@@ -65,10 +65,11 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
                   <Clock className="w-4 h-4 text-outline-variant group-focus-within:text-primary transition-colors" />
                 </div>
                 <input 
+                  id="user-time"
                   type="time" 
                   value={userTime}
                   onChange={(e) => setUserTime(e.target.value)}
-                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl pl-11 pr-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner"
+                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl pl-11 pr-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 />
               </div>
             </div>
