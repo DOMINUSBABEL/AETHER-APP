@@ -13,6 +13,9 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+## 2024-07-08 - Explicit Form Labels & Button Groups
+**Learning:** React elements formatted as visual form labels (`<label>`) over non-input semantic groups (like button groups for language selection) are flagged by standard a11y tools as missing `htmlFor` attributes and they confuse screen readers. For proper a11y, horizontal toggle controls functioning as radio buttons should be wrapped in `role="group"` and labelled by `aria-labelledby` referencing a custom text element id, not an orphaned `<label>`. Also explicitly linking inputs to labels via `id`/`htmlFor` instead of just wrapping is safer for focus and screen reader detection.
+**Action:** Replace parent-less `<label>` tags above generic groups (like div flex rows with multiple buttons) with standard `<div>` elements having an id, and wrap the internal container with `role="group" aria-labelledby="that-id"`. Always use explicit `id` and `htmlFor` for `<input>` elements.
 
 ## 2024-07-06 - Improve Form Controls and Scrollable Area Accessibility
 **Learning:** For custom horizontal selectors or toggles designed to look like standard controls, using `role="group"` with an explicit `aria-labelledby` creates a clearer structure for screen readers than disconnected labels. Horizontally scrollable areas also must have `tabIndex={0}` to ensure keyboard-only users can navigate through the overflow content without relying on a mouse.

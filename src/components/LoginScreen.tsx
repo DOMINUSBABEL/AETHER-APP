@@ -56,6 +56,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
                 />
               </div>
             </div>
+            <div className="relative group">
               <label htmlFor="user-time" className="block font-label text-[10px] tracking-widest uppercase text-outline mb-2 ml-1 transition-colors group-focus-within:text-primary">
                 {t('settings.time.label')}
               </label>
