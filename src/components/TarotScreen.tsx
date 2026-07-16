@@ -204,7 +204,7 @@ export default function TarotScreen() {
 
               <button
                 onClick={startReading}
-                className="w-full py-4 mt-2 rounded-xl bg-primary text-on-primary font-label text-xs tracking-widest uppercase hover:bg-primary-fixed hover:shadow-[0_0_25px_rgba(212,175,55,0.35)] transition-all duration-300 shadow-lg shadow-primary/20 active:scale-[0.98]"
+                className="w-full py-4 mt-2 rounded-xl bg-primary text-on-primary font-label text-xs tracking-widest uppercase hover:bg-primary-fixed hover:shadow-[0_0_25px_rgba(212,175,55,0.35)] transition-all duration-300 shadow-lg shadow-primary/20 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 {t('tarot.setup.start')}
               </button>

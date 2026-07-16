@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { drawTarotCardFront, drawTarotCardBack } from '../utils/cardArtwork';
 
@@ -287,11 +287,23 @@ export default function TarotCard3D({
     setIsFlipped(prev => !prev);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleFlip();
+    }
+  };
+
   return (
     <div 
       ref={containerRef} 
-      className="relative w-full max-w-[280px] mx-auto select-none flex flex-col items-center group cursor-pointer"
+      className="relative w-full max-w-[280px] mx-auto select-none flex flex-col items-center group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-xl"
       onClick={toggleFlip}
+      role="button"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      aria-expanded={isFlipped}
+      aria-label={`${cardName}${isFlipped ? (isReversed ? ' (Invertida)' : ' (Al derecho)') : ' (Oculta)'}`}
     >
       <div className={`absolute -top-3 left-0 font-label text-[9px] tracking-[0.2em] uppercase ${colorClass} opacity-60 z-10 pointer-events-none`}>
         {position} • {title}
