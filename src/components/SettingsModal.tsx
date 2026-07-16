@@ -97,10 +97,9 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   </p>
                 </div>
 
-                <div>
-                  <label id="settings-language-label" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <span id="settings-language-label" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.language.label')}
-                  </label>
+                  </span>
                   <div role="group" aria-labelledby="settings-language-label" className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
                     <button
                       onClick={() => setLanguage('es')}
