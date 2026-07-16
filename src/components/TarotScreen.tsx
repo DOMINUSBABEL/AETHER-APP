@@ -139,35 +139,38 @@ export default function TarotScreen() {
             <div className="space-y-6 glass-card p-6 md:p-8 rounded-2xl border border-primary/20">
               {/* Question Input */}
               <div className="relative group">
-                <label className="flex items-center gap-2 font-label text-[10px] tracking-widest uppercase text-primary mb-3 ml-1">
+                <label htmlFor="tarot-question" className="flex items-center gap-2 font-label text-[10px] tracking-widest uppercase text-primary mb-3 ml-1">
                   <HelpCircle className="w-3.5 h-3.5" />
                   {t('tarot.question.label')}
                 </label>
                 <textarea
+                  id="tarot-question"
                   value={question}
                   onChange={(e) => setQuestion(e.target.value)}
                   placeholder={t('tarot.question.placeholder')}
                   rows={2}
-                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner placeholder:text-on-surface-variant/40 resize-none font-body leading-relaxed"
+                  className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-all text-sm shadow-inner placeholder:text-on-surface-variant/40 resize-none font-body leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 />
               </div>
 
               {/* Deck Selection */}
               <div>
-                <label className="block font-label text-[10px] tracking-widest uppercase text-primary mb-3">
+                <label id="deck-label" className="block font-label text-[10px] tracking-widest uppercase text-primary mb-3">
                   {t('tarot.setup.deck')}
                 </label>
-                <div className="grid grid-cols-1 gap-3">
+                <div role="group" aria-labelledby="deck-label" className="grid grid-cols-1 gap-3">
                   <button
                     onClick={() => setDeckType('full')}
-                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${deckType === 'full' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                    aria-pressed={deckType === 'full'}
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${deckType === 'full' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
                   >
                     <Layers className="w-5 h-5" />
                     <span className="font-label text-xs uppercase tracking-widest">{t('tarot.setup.deck.full')}</span>
                   </button>
                   <button
                     onClick={() => setDeckType('major')}
-                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${deckType === 'major' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                    aria-pressed={deckType === 'major'}
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${deckType === 'major' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
                   >
                     <Sparkles className="w-5 h-5" />
                     <span className="font-label text-xs uppercase tracking-widest">{t('tarot.setup.deck.major')}</span>
@@ -177,15 +180,16 @@ export default function TarotScreen() {
 
               {/* Spread Selection */}
               <div>
-                <label className="block font-label text-[10px] tracking-widest uppercase text-primary mb-3">
+                <label id="spread-label" className="block font-label text-[10px] tracking-widest uppercase text-primary mb-3">
                   {t('tarot.setup.spread')}
                 </label>
-                <div className="grid grid-cols-1 gap-3">
+                <div role="group" aria-labelledby="spread-label" className="grid grid-cols-1 gap-3">
                   {(['1', '3', '5'] as const).map((type) => (
                     <button
                       key={type}
                       onClick={() => setSpreadType(type)}
-                      className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${spreadType === type ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                      aria-pressed={spreadType === type}
+                      className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${spreadType === type ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
                     >
                       <div className="flex gap-1">
                         {Array.from({ length: parseInt(type) }).map((_, i) => (
