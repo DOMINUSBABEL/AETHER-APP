@@ -98,6 +98,7 @@ const translations = {
     'tarot.question.placeholder': 'Escribe tu pregunta o intención aquí...',
     'tarot.reading.title': 'Lectura de Sinergía Algorítmica',
     'tarot.reading.unveiling': 'Haz clic en cada carta para revelar su energía...',
+    'daily.zodiac.label': 'Selector de signos zodiacales',
   },
   en: {
     'login.title': 'AETHER',
@@ -188,6 +189,7 @@ const translations = {
     'tarot.question.placeholder': 'Type your question or intention here...',
     'tarot.reading.title': 'Algorithmic Synergy Reading',
     'tarot.reading.unveiling': 'Click on each card to reveal its energy...',
+    'daily.zodiac.label': 'Zodiac sign selector',
   }
 };
 
