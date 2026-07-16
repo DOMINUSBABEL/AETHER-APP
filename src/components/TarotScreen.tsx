@@ -158,11 +158,11 @@ export default function TarotScreen() {
                 <label id="deck-selection-label" className="block font-label text-[10px] tracking-widest uppercase text-primary mb-3">
                   {t('tarot.setup.deck')}
                 </label>
-                <div className="grid grid-cols-1 gap-3" role="group" aria-labelledby="deck-selection-label">
+                <div role="group" aria-labelledby="deck-selection-label" className="grid grid-cols-1 gap-3">
                   <button
                     onClick={() => setDeckType('full')}
                     aria-pressed={deckType === 'full'}
-                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${deckType === 'full' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${deckType === 'full' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   >
                     <Layers className="w-5 h-5" />
                     <span className="font-label text-xs uppercase tracking-widest">{t('tarot.setup.deck.full')}</span>
@@ -170,7 +170,7 @@ export default function TarotScreen() {
                   <button
                     onClick={() => setDeckType('major')}
                     aria-pressed={deckType === 'major'}
-                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${deckType === 'major' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                    className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${deckType === 'major' ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   >
                     <Sparkles className="w-5 h-5" />
                     <span className="font-label text-xs uppercase tracking-widest">{t('tarot.setup.deck.major')}</span>
@@ -183,13 +183,13 @@ export default function TarotScreen() {
                 <label id="spread-selection-label" className="block font-label text-[10px] tracking-widest uppercase text-primary mb-3">
                   {t('tarot.setup.spread')}
                 </label>
-                <div className="grid grid-cols-1 gap-3" role="group" aria-labelledby="spread-selection-label">
+                <div role="group" aria-labelledby="spread-selection-label" className="grid grid-cols-1 gap-3">
                   {(['1', '3', '5'] as const).map((type) => (
                     <button
                       key={type}
                       onClick={() => setSpreadType(type)}
                       aria-pressed={spreadType === type}
-                      className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${spreadType === type ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'}`}
+                      className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all ${spreadType === type ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-outline-variant/30 text-on-surface-variant hover:border-primary/50'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     >
                       <div className="flex gap-1">
                         {Array.from({ length: parseInt(type) }).map((_, i) => (

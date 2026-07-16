@@ -13,3 +13,7 @@
 ## 2024-05-18 - [Accessibility] Zodiac Selector
 **Learning:** Custom horizontally scrollable visual selectors (like the Zodiac signs list) are completely opaque to keyboard and screen-reader users unless specifically instrumented.
 **Action:** When implementing custom horizontal scrolling lists, apply `tabIndex={0}` to the container along with `focus-visible` outline styles, assign `role="list"` to the container and `role="listitem"` to children, and dynamically use `aria-current="true"` to denote the active selection.
+
+## 2024-07-06 - Improve Form Controls and Scrollable Area Accessibility
+**Learning:** For custom horizontal selectors or toggles designed to look like standard controls, using `role="group"` with an explicit `aria-labelledby` creates a clearer structure for screen readers than disconnected labels. Horizontally scrollable areas also must have `tabIndex={0}` to ensure keyboard-only users can navigate through the overflow content without relying on a mouse.
+**Action:** Always wrap custom interactive groups in `role="group"` with proper labeling, and systematically apply `tabIndex={0}` with `focus-visible` styles to any container with `overflow-x-auto`.
