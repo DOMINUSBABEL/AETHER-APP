@@ -20,3 +20,7 @@
 ## 2024-07-06 - Improve Form Controls and Scrollable Area Accessibility
 **Learning:** For custom horizontal selectors or toggles designed to look like standard controls, using `role="group"` with an explicit `aria-labelledby` creates a clearer structure for screen readers than disconnected labels. Horizontally scrollable areas also must have `tabIndex={0}` to ensure keyboard-only users can navigate through the overflow content without relying on a mouse.
 **Action:** Always wrap custom interactive groups in `role="group"` with proper labeling, and systematically apply `tabIndex={0}` with `focus-visible` styles to any container with `overflow-x-auto`.
+
+## 2023-10-27 - Empty States Unlock Features
+**Learning:** Empty states are not just for error handling or onboarding; they are critical micro-UX elements for discoverability. When a feature (like Synastry in SoulMapScreen) is conditionally hidden entirely based on missing state (partnerDate), users have no affordance to know it exists or how to activate it.
+**Action:** Always provide an informative empty state for conditionally rendered major UI sections, explaining both what the feature is and the actionable step (e.g., "Add in settings") required to unlock it.

@@ -320,7 +320,7 @@ export default function SoulMapScreen() {
       </section>
 
       {/* Synastry / Compatibility Section */}
-      {partnerDate && (
+      {partnerDate ? (
         <section className="glass-card rounded-xl p-6 border border-tertiary/20 shadow-lg mt-8 bg-tertiary/5">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
@@ -348,6 +348,18 @@ export default function SoulMapScreen() {
               <span className="block text-[8px] text-outline uppercase mt-1">{partnerElement}</span>
             </div>
           </div>
+        </section>
+      ) : (
+        <section className="glass-card rounded-xl p-6 md:p-8 border border-outline-variant/10 shadow-md mt-8 flex flex-col items-center text-center bg-surface-container-lowest/50">
+          <Heart className="w-8 h-8 text-outline-variant mb-4 opacity-50" />
+          <h3 className="font-headline text-xl text-on-surface-variant mb-2">
+            {language === 'es' ? 'Sinastría Oculta' : 'Hidden Synastry'}
+          </h3>
+          <p className="text-on-surface-variant/70 text-sm max-w-md font-light">
+            {language === 'es'
+              ? 'Añade la fecha de nacimiento de otra persona en los ajustes para descubrir su compatibilidad y vínculos astrales compartidos.'
+              : 'Add another person\'s birth date in settings to discover your compatibility and shared astral bonds.'}
+          </p>
         </section>
       )}
     </motion.div>
