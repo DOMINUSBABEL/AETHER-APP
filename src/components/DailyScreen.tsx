@@ -68,7 +68,11 @@ export default function DailyScreen() {
     >
       {/* Zodiac Header Tracker */}
       <section className="relative">
-        <div className="flex overflow-x-auto space-x-8 pb-4 scroll-smooth no-scrollbar border-b border-outline-variant/10">
+        <div
+          className="flex overflow-x-auto space-x-8 pb-4 scroll-smooth no-scrollbar border-b border-outline-variant/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          tabIndex={0}
+          aria-label={language === 'es' ? 'Rastreador de signos zodiacales' : 'Zodiac signs tracker'}
+        >
           {zodiacSigns.map((sign, i) => (
             <div key={sign} className={`flex flex-col items-center space-y-2 shrink-0 ${sign === sunSign ? 'text-primary' : 'opacity-20'}`}>
               <span className={`font-label text-[10px] tracking-widest uppercase ${sign === sunSign ? 'font-bold tracking-[0.2em] text-glow' : ''}`}>

@@ -74,7 +74,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     type="time" 
                     value={userTime}
                     onChange={(e) => setUserTime(e.target.value)}
-                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-colors shadow-inner"
+                    className="w-full bg-surface-container-lowest/50 border border-outline-variant/30 rounded-xl px-4 py-3.5 text-on-surface focus:outline-none focus:border-primary/50 focus:bg-surface-container-lowest transition-colors shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   />
                   <p className="text-[10px] text-on-surface-variant mt-2 italic ml-1">
                     {t('settings.time.desc')}
@@ -97,7 +97,6 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   </p>
                 </div>
 
-                <div>
                   <span id="settings-language-label" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.language.label')}
                   </span>
