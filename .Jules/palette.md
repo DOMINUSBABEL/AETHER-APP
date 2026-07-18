@@ -20,3 +20,6 @@
 ## 2024-07-06 - Improve Form Controls and Scrollable Area Accessibility
 **Learning:** For custom horizontal selectors or toggles designed to look like standard controls, using `role="group"` with an explicit `aria-labelledby` creates a clearer structure for screen readers than disconnected labels. Horizontally scrollable areas also must have `tabIndex={0}` to ensure keyboard-only users can navigate through the overflow content without relying on a mouse.
 **Action:** Always wrap custom interactive groups in `role="group"` with proper labeling, and systematically apply `tabIndex={0}` with `focus-visible` styles to any container with `overflow-x-auto`.
+## 2024-05-15 - Missing htmlFor Association in Settings Modal Form
+**Learning:** Found an accessibility issue pattern specific to form elements in custom modals where individual inputs may drop the `htmlFor` association, even when neighboring fields are properly labeled. This severs the explicit programmatic link for screen readers, making it harder for users relying on assistive tech to understand what an input field represents.
+**Action:** Always verify `htmlFor` explicitly matches the `id` of its corresponding `<input>` or control for every field, especially in newly added sections (like the optional "Partner's Date") inside existing forms.
