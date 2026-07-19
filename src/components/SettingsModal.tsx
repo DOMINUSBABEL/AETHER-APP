@@ -82,7 +82,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                 </div>
 
                 <div>
-                  <label className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
+                  <label htmlFor="settings-partner-date" className="block font-label text-xs tracking-widest uppercase text-outline mb-2 ml-1">
                     {t('settings.partnerDate.label')}
                   </label>
                   <input 
