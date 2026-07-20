@@ -37,7 +37,13 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
           {t('login.subtitle')}
         </p>
 
-        <div className="w-full space-y-8">
+        <form
+          className="w-full space-y-8"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onLogin();
+          }}
+        >
           <div className="text-left space-y-5">
             <div className="relative group">
               <label htmlFor="user-date" className="block font-label text-[10px] tracking-widest uppercase text-outline mb-2 ml-1 transition-colors group-focus-within:text-primary">
@@ -94,6 +100,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
 
           <div role="group" aria-label={t('settings.language.label') || "Language"} className="flex items-center justify-between bg-surface-container-lowest/80 border border-outline-variant/20 rounded-xl p-1.5 backdrop-blur-sm">
             <button
+              type="button"
               onClick={() => setLanguage('es')}
               aria-pressed={language === 'es'}
               className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'es' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
@@ -101,6 +108,7 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
               Español
             </button>
             <button
+              type="button"
               onClick={() => setLanguage('en')}
               aria-pressed={language === 'en'}
               className={`flex-1 py-2.5 rounded-lg font-label text-xs tracking-widest uppercase transition-all duration-300 ${language === 'en' ? 'bg-surface-container-high text-primary shadow-md scale-100' : 'text-on-surface-variant hover:text-on-surface scale-95 hover:scale-100'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
@@ -110,12 +118,12 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
           </div>
 
           <button
-            onClick={onLogin}
+            type="submit"
             className="w-full bg-primary text-on-primary hover:bg-primary-fixed py-4 rounded-xl font-label text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {t('login.button')}
           </button>
-        </div>
+        </form>
       </motion.div>
     </div>
   );
