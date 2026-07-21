@@ -20,3 +20,6 @@
 ## 2024-07-06 - Improve Form Controls and Scrollable Area Accessibility
 **Learning:** For custom horizontal selectors or toggles designed to look like standard controls, using `role="group"` with an explicit `aria-labelledby` creates a clearer structure for screen readers than disconnected labels. Horizontally scrollable areas also must have `tabIndex={0}` to ensure keyboard-only users can navigate through the overflow content without relying on a mouse.
 **Action:** Always wrap custom interactive groups in `role="group"` with proper labeling, and systematically apply `tabIndex={0}` with `focus-visible` styles to any container with `overflow-x-auto`.
+## 2024-05-18 - Form Submission via Enter Key
+**Learning:** Users often instinctively press 'Enter' to submit forms. If input fields are not wrapped in a `<form>` element, this expected behavior fails.
+**Action:** Always wrap input fields in a `<form>` element with an `onSubmit` handler, use `type="submit"` on the primary action button, and explicitly set `type="button"` on secondary interactive elements (like toggle buttons) to prevent unintended form submissions.
