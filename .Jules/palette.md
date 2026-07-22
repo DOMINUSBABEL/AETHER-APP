@@ -20,3 +20,7 @@
 ## 2024-07-06 - Improve Form Controls and Scrollable Area Accessibility
 **Learning:** For custom horizontal selectors or toggles designed to look like standard controls, using `role="group"` with an explicit `aria-labelledby` creates a clearer structure for screen readers than disconnected labels. Horizontally scrollable areas also must have `tabIndex={0}` to ensure keyboard-only users can navigate through the overflow content without relying on a mouse.
 **Action:** Always wrap custom interactive groups in `role="group"` with proper labeling, and systematically apply `tabIndex={0}` with `focus-visible` styles to any container with `overflow-x-auto`.
+
+## 2023-10-27 - [Enable Enter key to submit login form]
+**Learning:** In React applications with custom input fields and buttons, users often expect to submit forms by pressing the "Enter" key. Wrapping input fields in an explicit `<form>` element with an `onSubmit` handler is a standard and robust way to achieve this accessibility and UX expectation. When doing so, it is critical to explicitly mark non-submit interactive elements (like custom toggle buttons or icon buttons) with `type="button"` to prevent them from inadvertently triggering form submission, a common issue in React when the default button type inside a form is `submit`.
+**Action:** Always wrap logical groups of inputs and their primary action button in a `<form>` element to support native "Enter" key submission. Ensure all secondary or interactive buttons within the form scope are explicitly typed as `type="button"`.
